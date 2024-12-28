@@ -149,5 +149,11 @@ namespace portable_executable
 		const section_header_t* find_section(const char* name) const;
 
 		pe_crt::uint8_t* find_export(const char* name) const;
+
+		// IDA signatures
+		pe_crt::uint8_t* signature_scan(const char* signature) const;
+
+		// byte signatures
+		pe_crt::uint8_t* signature_scan(const pe_crt::uint8_t* pattern, pe_crt::size_t pattern_size) const;
 	};
 }
