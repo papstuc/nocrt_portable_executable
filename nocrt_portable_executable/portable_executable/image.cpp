@@ -63,23 +63,23 @@ portable_executable::pe_crt::uint8_t* portable_executable::image_t::find_export(
 
 portable_executable::pe_crt::uint8_t* portable_executable::image_t::signature_scan(const char* signature) const
 {
-	constexpr auto in_rage = [](char x, char a, char b) -> bool
+	constexpr auto in_range = [=](char x, char a, char b) -> bool
 	{
 		return x >= a && x <= b;
 	};
 
-	constexpr auto get_bits = [](char x) -> pe_crt::int8_t
+	constexpr auto get_bits = [=](char x) -> pe_crt::int8_t
 	{
 		if (x >= 'a' && x <= 'f')
 		{
 			x -= 0x20;
 		}
 
-		if (in_rage(x, 'A', 'F'))
+		if (in_range(x, 'A', 'F'))
 		{
 			return x - 'A' + 0xA;
 		}
-		else if (in_rage(x, '0', '9'))
+		else if (in_range(x, '0', '9'))
 		{
 			return x - '0';
 		}
@@ -87,7 +87,7 @@ portable_executable::pe_crt::uint8_t* portable_executable::image_t::signature_sc
 		return 0;
 	};
 
-	constexpr auto get_byte = [](const char* x) -> pe_crt::uint8_t
+	constexpr auto get_byte = [=](const char* x) -> pe_crt::uint8_t
 	{
 		return static_cast<pe_crt::uint8_t>((get_bits(x[0]) << 4) | get_bits(x[1]));
 	};
