@@ -39,6 +39,12 @@ namespace portable_executable
         pe_crt::uint32_t max_entry_index;
     };
 
+    struct relocation_entry_t
+    {
+        relocation_entry_descriptor_t descriptor;
+        pe_crt::uint32_t virtual_address;
+    };
+
     class relocations_iterator_t
     {
     private:
@@ -54,7 +60,7 @@ namespace portable_executable
 
         relocations_iterator_t(const raw_relocation_block_descriptor_t* raw_relocation_block_descriptor);
 
-        using value_type = relocation_entry_descriptor_t;
+        using value_type = relocation_entry_t;
         using pointer = value_type*;
         using reference = value_type&;
 
