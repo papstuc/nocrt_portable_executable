@@ -2,6 +2,7 @@
 
 #include "pe_crt/crt_type_traits.hpp"
 #include "pe_crt/crt_types.hpp"
+#include "pe_crt/crt_memory.hpp"
 
 namespace portable_executable
 {
@@ -10,6 +11,8 @@ namespace portable_executable
         char name[256];
 
         pe_crt::uint8_t* address;
+
+        export_entry_t() : address(nullptr) { pe_crt::memset(this->name, 0, sizeof this->name); }
     };
 
     class exports_iterator_t
